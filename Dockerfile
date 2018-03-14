@@ -13,8 +13,9 @@ ADD preferences /etc/apt/preferences
 
 # clean out, update and install some base utilities
 RUN apt-get -y update && apt-get -y upgrade && apt-get clean && \
-	apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
-		unattended-upgrades ssmtp lsof procps \
+	apt-get -y --no-install-recommends install \
+		apt-utils lsb-release curl git cron at logrotate rsyslog \
+		unattended-upgrades ssmtp lsof procps net-tools htop \
 		initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux && \
 	apt-get clean && \
 	sed -i '/imklog/{s/^/#/}' /etc/rsyslog.conf
